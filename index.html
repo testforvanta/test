@@ -132,6 +132,16 @@
             50% { border-color: var(--primary) }
         }
         
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
         /* Smooth scroll animation for navigation */
         html {
             scroll-behavior: smooth;
@@ -162,6 +172,45 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
         }
+        
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .hero-text {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .terminal-container {
+                margin-top: 2rem;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cta-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
     </style>
 </head>
 <body class="hacker-grid min-h-screen">
@@ -174,12 +223,12 @@
     </div>
     
     <!-- Navigation -->
-    <nav class="relative z-50 py-6 px-4 sm:px-8 lg:px-16 backdrop-blur-md">
+    <nav class="relative z-50 py-4 px-4 sm:px-8 lg:px-16 backdrop-blur-md">
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <!-- Logo image span - replace src with your actual logo -->
-                <span id="logo-image" >
-                     <img src="logo.png" alt="VantaSec Logo" class="h-10" >
+                <span id="logo-image">
+                     <img src="logo.png" alt="VantaSec Logo" class="h-8 sm:h-10">
                 </span>
             </div>
             
@@ -190,7 +239,7 @@
                 <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-300 hover:underline hover:underline-offset-8 hover:decoration-purple-500">Contact</a>
             </div>
             
-            <button class="md:hidden text-gray-300 hover:text-white">
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
             
@@ -200,92 +249,129 @@
                 </a>
             </div>
         </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-64 bg-gray-900/95 backdrop-blur-lg z-50 p-6 shadow-2xl">
+            <div class="flex justify-end mb-8">
+                <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="flex flex-col space-y-6">
+                <a href="#services" class="text-gray-300 hover:text-white text-xl transition-colors duration-300">Services</a>
+                <a href="#solutions" class="text-gray-300 hover:text-white text-xl transition-colors duration-300">Solutions</a>
+                <a href="#about" class="text-gray-300 hover:text-white text-xl transition-colors duration-300">About</a>
+                <a href="#contact" class="text-gray-300 hover:text-white text-xl transition-colors duration-300">Contact</a>
+                
+                <div class="pt-6 border-t border-gray-800">
+                    <a href="#contact" class="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 text-center">
+                        Get Protected
+                    </a>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-6 left-6 right-6 flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+            </div>
+        </div>
     </nav>
     
     <!-- Hero Section -->
-    <section class="relative py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+    <section class="relative py-12 sm:py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
         <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-600 rounded-full filter blur-3xl opacity-20"></div>
         <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500 rounded-full filter blur-3xl opacity-20"></div>
         
-        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
-                <div class="inline-block px-4 py-1 bg-gray-800 rounded-full mb-4">
+                <div class="inline-block px-3 py-1 bg-gray-800 rounded-full mb-4">
                     <span class="text-sm font-medium gradient-text">CYBERSECURITY 3.0</span>
                 </div>
                 
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 hero-text">
                     <span class="gradient-text glow">Quantum-Safe</span><br>
                     <span class="typewriter">Cyber Defense</span>
                 </h1>
                 
-                <p class="text-lg text-gray-400 mb-8 max-w-lg">
+                <p class="text-base sm:text-lg text-gray-400 mb-6 sm:mb-8 max-w-lg">
                     VantaSec provides military-grade cybersecurity solutions powered by AI and quantum-resistant cryptography to protect your digital assets against evolving threats.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow text-center">
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="px-6 py-3 sm:px-8 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow text-center">
                         Start Free Trial
                     </a>
-                    <a href="#solutions" class="px-8 py-3 border border-gray-700 rounded-full font-medium hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-2 btn-hover-grow">
+                    <a href="#solutions" class="px-6 py-3 sm:px-8 sm:py-3 border border-gray-700 rounded-full font-medium hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-2 btn-hover-grow">
                         <i class="fas fa-play-circle"></i>
                         <span>Watch Demo</span>
                     </a>
                 </div>
                 
-                <div class="mt-12 flex items-center space-x-4">
+                <div class="mt-8 sm:mt-12 flex items-center space-x-4">
                     <div class="flex -space-x-2">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" class="w-10 h-10 rounded-full border-2 border-gray-800">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border-2 border-gray-800">
-                        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-10 h-10 rounded-full border-2 border-gray-800">
+                        <img src="https://randomuser.me/api/portraits/women/12.jpg" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-800">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-800">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-800">
                     </div>
                     <div>
                         <div class="flex items-center">
-                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                            <span class="font-medium">4.9/5.0</span>
+                            <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                            <span class="font-medium text-sm sm:text-base">4.9/5.0</span>
                         </div>
-                        <p class="text-sm text-gray-500">Trusted by 850+ enterprises</p>
+                        <p class="text-xs sm:text-sm text-gray-500">Trusted by 850+ enterprises</p>
                     </div>
                 </div>
             </div>
             
-            <div class="relative">
-                <div class="cyber-border rounded-2xl overflow-hidden bg-gray-900 p-1 scanline">
-                    <div class="relative h-full w-full bg-gray-900 rounded-xl overflow-hidden">
+            <div class="relative mt-8 sm:mt-0 terminal-container">
+                <div class="cyber-border rounded-xl sm:rounded-2xl overflow-hidden bg-gray-900 p-1 scanline">
+                    <div class="relative h-full w-full bg-gray-900 rounded-lg sm:rounded-xl overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10"></div>
-                        <div class="relative z-10 p-8">
-                            <div class="flex items-center space-x-2 mb-6">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <div class="relative z-10 p-4 sm:p-6 md:p-8">
+                            <div class="flex items-center space-x-2 mb-4 sm:mb-6">
+                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
                             </div>
                             
-                            <div class="font-mono text-green-400 mb-4">
+                            <div class="font-mono text-green-400 text-sm sm:text-base mb-4">
                                 <p class="mb-2">> Initializing VantaSec Quantum Firewall...</p>
                                 <p class="mb-2">> Scanning network vulnerabilities...</p>
                                 <p class="mb-2">> Detecting 0 threats <span class="text-white">[Protected]</span></p>
                                 <p class="terminal-cursor">> Ready for secure operations</p>
                             </div>
                             
-                            <div class="mt-8 grid grid-cols-3 gap-4">
-                                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-                                    <div class="text-cyan-400 text-2xl mb-2">
+                            <div class="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-4">
+                                <div class="bg-gray-800/50 p-2 sm:p-4 rounded-lg border border-gray-700">
+                                    <div class="text-cyan-400 text-xl sm:text-2xl mb-1 sm:mb-2">
                                         <i class="fas fa-shield-alt"></i>
                                     </div>
-                                    <h3 class="font-medium">AI-Powered</h3>
+                                    <h3 class="font-medium text-sm sm:text-base">AI-Powered</h3>
                                     <p class="text-xs text-gray-400">Threat Detection</p>
                                 </div>
-                                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-                                    <div class="text-purple-400 text-2xl mb-2">
+                                <div class="bg-gray-800/50 p-2 sm:p-4 rounded-lg border border-gray-700">
+                                    <div class="text-purple-400 text-xl sm:text-2xl mb-1 sm:mb-2">
                                         <i class="fas fa-lock"></i>
                                     </div>
-                                    <h3 class="font-medium">Quantum</h3>
+                                    <h3 class="font-medium text-sm sm:text-base">Quantum</h3>
                                     <p class="text-xs text-gray-400">Encryption</p>
                                 </div>
-                                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-                                    <div class="text-green-400 text-2xl mb-2">
+                                <div class="bg-gray-800/50 p-2 sm:p-4 rounded-lg border border-gray-700">
+                                    <div class="text-green-400 text-xl sm:text-2xl mb-1 sm:mb-2">
                                         <i class="fas fa-globe"></i>
                                     </div>
-                                    <h3 class="font-medium">Global</h3>
+                                    <h3 class="font-medium text-sm sm:text-base">Global</h3>
                                     <p class="text-xs text-gray-400">Protection</p>
                                 </div>
                             </div>
@@ -297,56 +383,56 @@
     </section>
     
     <!-- Clients Section -->
-    <section class="py-16 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
-        <div class="text-center mb-12">
-            <p class="text-gray-500 uppercase tracking-wider text-sm mb-2">TRUSTED BY INDUSTRY LEADERS</p>
-            <div class="w-16 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mb-6"></div>
+    <section class="py-12 sm:py-16 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+        <div class="text-center mb-8 sm:mb-12">
+            <p class="text-gray-500 uppercase tracking-wider text-xs sm:text-sm mb-2">TRUSTED BY INDUSTRY LEADERS</p>
+            <div class="w-12 sm:w-16 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mb-4 sm:mb-6"></div>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+        <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8 items-center">
             <div class="flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://logo.clearbit.com/ibm.com" alt="IBM" class="h-8 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://logo.clearbit.com/ibm.com" alt="IBM" class="h-6 sm:h-8 grayscale hover:grayscale-0 transition-all duration-500">
             </div>
             <div class="flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="h-8 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="h-6 sm:h-8 grayscale hover:grayscale-0 transition-all duration-500">
             </div>
             <div class="flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://logo.clearbit.com/tesla.com" alt="Tesla" class="h-8 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://logo.clearbit.com/tesla.com" alt="Tesla" class="h-6 sm:h-8 grayscale hover:grayscale-0 transition-all duration-500">
             </div>
             <div class="flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="h-8 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="h-6 sm:h-8 grayscale hover:grayscale-0 transition-all duration-500">
             </div>
             <div class="flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://logo.clearbit.com/samsung.com" alt="Samsung" class="h-10 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://logo.clearbit.com/samsung.com" alt="Samsung" class="h-8 sm:h-10 grayscale hover:grayscale-0 transition-all duration-500">
             </div>
             <div class="flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://logo.clearbit.com/nasa.gov" alt="NASA" class="h-10 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://logo.clearbit.com/nasa.gov" alt="NASA" class="h-8 sm:h-10 grayscale hover:grayscale-0 transition-all duration-500">
             </div>
         </div>
     </section>
     
     <!-- Services Section -->
-    <section id="services" class="py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+    <section id="services" class="py-12 sm:py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+        <div class="text-center mb-12 sm:mb-16">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
                 <span class="gradient-text">Advanced Protection</span> Services
             </h2>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+            <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
                 Our cutting-edge cybersecurity solutions are designed to protect against even the most sophisticated threats.
             </p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <!-- Penetration Testing -->
-            <div class="cyber-border bg-gray-900/50 rounded-xl p-8 hover:bg-gray-900 transition-all duration-300 group">
-                <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br from-cyan-500 to-purple-600 transition-all duration-300">
-                    <i class="fas fa-bug text-2xl text-red-400 group-hover:text-white"></i>
+            <div class="cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 hover:bg-gray-900 transition-all duration-300 group service-card">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-gradient-to-br from-cyan-500 to-purple-600 transition-all duration-300">
+                    <i class="fas fa-bug text-xl sm:text-2xl text-red-400 group-hover:text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Penetration Testing</h3>
-                <p class="text-gray-400 mb-4">
+                <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Penetration Testing</h3>
+                <p class="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">
                     Simulate real-world attacks to identify and exploit vulnerabilities in your systems before malicious actors can.
                 </p>
-                <ul class="text-sm text-gray-500 space-y-1 mb-4">
+                <ul class="text-xs sm:text-sm text-gray-500 space-y-1 mb-3 sm:mb-4">
                     <li class="flex items-center">
                         <i class="fas fa-check-circle text-green-400 mr-2 text-xs"></i>
                         Network & Infrastructure Testing
@@ -364,22 +450,22 @@
                         Wireless Network Assessment
                     </li>
                 </ul>
-                <a href="#contact" class="inline-flex items-center text-red-400 group-hover:text-white transition-colors duration-300">
+                <a href="#contact" class="inline-flex items-center text-sm sm:text-base text-red-400 group-hover:text-white transition-colors duration-300">
                     <span>Request Assessment</span>
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
             
             <!-- Security Consulting -->
-            <div class="cyber-border bg-gray-900/50 rounded-xl p-8 hover:bg-gray-900 transition-all duration-300 group">
-                <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br from-cyan-500 to-purple-600 transition-all duration-300">
-                    <i class="fas fa-headset text-2xl text-purple-400 group-hover:text-white"></i>
+            <div class="cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 hover:bg-gray-900 transition-all duration-300 group service-card">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-gradient-to-br from-cyan-500 to-purple-600 transition-all duration-300">
+                    <i class="fas fa-headset text-xl sm:text-2xl text-purple-400 group-hover:text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Security Consulting</h3>
-                <p class="text-gray-400 mb-4">
+                <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Security Consulting</h3>
+                <p class="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">
                     Expert guidance to develop and implement robust cybersecurity strategies and policies tailored to your organization.
                 </p>
-                <ul class="text-sm text-gray-500 space-y-1 mb-4">
+                <ul class="text-xs sm:text-sm text-gray-500 space-y-1 mb-3 sm:mb-4">
                     <li class="flex items-center">
                         <i class="fas fa-check-circle text-green-400 mr-2 text-xs"></i>
                         Security Architecture Review
@@ -397,22 +483,22 @@
                         Security Awareness Training
                     </li>
                 </ul>
-                <a href="#contact" class="inline-flex items-center text-purple-400 group-hover:text-white transition-colors duration-300">
+                <a href="#contact" class="inline-flex items-center text-sm sm:text-base text-purple-400 group-hover:text-white transition-colors duration-300">
                     <span>Consult Our Experts</span>
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
             
             <!-- Vulnerability Assessment -->
-            <div class="cyber-border bg-gray-900/50 rounded-xl p-8 hover:bg-gray-900 transition-all duration-300 group">
-                <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br from-cyan-500 to-purple-600 transition-all duration-300">
-                    <i class="fas fa-search text-2xl text-cyan-400 group-hover:text-white"></i>
+            <div class="cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 hover:bg-gray-900 transition-all duration-300 group service-card">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-gradient-to-br from-cyan-500 to-purple-600 transition-all duration-300">
+                    <i class="fas fa-search text-xl sm:text-2xl text-cyan-400 group-hover:text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Vulnerability Assessment</h3>
-                <p class="text-gray-400 mb-4">
+                <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Vulnerability Assessment</h3>
+                <p class="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">
                     Systematic review of security weaknesses in your information systems with prioritized remediation plans.
                 </p>
-                <ul class="text-sm text-gray-500 space-y-1 mb-4">
+                <ul class="text-xs sm:text-sm text-gray-500 space-y-1 mb-3 sm:mb-4">
                     <li class="flex items-center">
                         <i class="fas fa-check-circle text-green-400 mr-2 text-xs"></i>
                         Automated & Manual Scanning
@@ -430,7 +516,7 @@
                         Prioritized Remediation Plans
                     </li>
                 </ul>
-                <a href="#contact" class="inline-flex items-center text-cyan-400 group-hover:text-white transition-colors duration-300">
+                <a href="#contact" class="inline-flex items-center text-sm sm:text-base text-cyan-400 group-hover:text-white transition-colors duration-300">
                     <span>Schedule Assessment</span>
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
@@ -439,137 +525,137 @@
     </section>
     
     <!-- Stats Section -->
-    <section class="py-20 px-4 sm:px-8 lg:px-16 bg-gradient-to-br from-gray-900 to-gray-900/50 relative overflow-hidden">
+    <section class="py-12 sm:py-20 px-4 sm:px-8 lg:px-16 bg-gradient-to-br from-gray-900 to-gray-900/50 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMDAwMDAwIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
         </div>
         
         <div class="relative max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">99.9%</div>
-                    <p class="text-gray-400">Threat Detection Rate</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+                <div class="text-center p-4">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-1 sm:mb-2">99.9%</div>
+                    <p class="text-xs sm:text-sm text-gray-400">Threat Detection Rate</p>
                 </div>
-                <div class="text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">24/7</div>
-                    <p class="text-gray-400">Security Monitoring</p>
+                <div class="text-center p-4">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-1 sm:mb-2">24/7</div>
+                    <p class="text-xs sm:text-sm text-gray-400">Security Monitoring</p>
                 </div>
-                <div class="text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">850+</div>
-                    <p class="text-gray-400">Enterprise Clients</p>
+                <div class="text-center p-4">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-1 sm:mb-2">850+</div>
+                    <p class="text-xs sm:text-sm text-gray-400">Enterprise Clients</p>
                 </div>
-                <div class="text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">0.2s</div>
-                    <p class="text-gray-400">Average Response Time</p>
+                <div class="text-center p-4">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-1 sm:mb-2">0.2s</div>
+                    <p class="text-xs sm:text-sm text-gray-400">Average Response Time</p>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- Solutions Section -->
-    <section id="solutions" class="py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section id="solutions" class="py-12 sm:py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div class="order-2 lg:order-1">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
                     <span class="gradient-text">Tailored Cybersecurity</span> Solutions
                 </h2>
                 
-                <div class="space-y-6">
-                    <div class="flex items-start space-x-4">
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="flex items-start space-x-3 sm:space-x-4">
                         <div class="flex-shrink-0 mt-1">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
-                                <i class="fas fa-check text-white text-sm"></i>
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs sm:text-sm"></i>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold mb-1">Custom Defense Frameworks</h3>
-                            <p class="text-gray-400">
+                            <h3 class="text-lg sm:text-xl font-bold mb-1">Custom Defense Frameworks</h3>
+                            <p class="text-sm sm:text-base text-gray-400">
                                 We build security architectures specifically designed for your infrastructure and threat landscape.
                             </p>
                         </div>
                     </div>
                     
-                    <div class="flex items-start space-x-4">
+                    <div class="flex items-start space-x-3 sm:space-x-4">
                         <div class="flex-shrink-0 mt-1">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
-                                <i class="fas fa-check text-white text-sm"></i>
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs sm:text-sm"></i>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold mb-1">Regulatory Compliance</h3>
-                            <p class="text-gray-400">
+                            <h3 class="text-lg sm:text-xl font-bold mb-1">Regulatory Compliance</h3>
+                            <p class="text-sm sm:text-base text-gray-400">
                                 Complete compliance solutions for GDPR, HIPAA, PCI-DSS, SOC2, and other regulatory requirements.
                             </p>
                         </div>
                     </div>
                     
-                    <div class="flex items-start space-x-4">
+                    <div class="flex items-start space-x-3 sm:space-x-4">
                         <div class="flex-shrink-0 mt-1">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
-                                <i class="fas fa-check text-white text-sm"></i>
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs sm:text-sm"></i>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold mb-1">Incident Response</h3>
-                            <p class="text-gray-400">
+                            <h3 class="text-lg sm:text-xl font-bold mb-1">Incident Response</h3>
+                            <p class="text-sm sm:text-base text-gray-400">
                                 Immediate response protocols with forensic analysis to minimize damage from security breaches.
                             </p>
                         </div>
                     </div>
                     
-                    <div class="flex items-start space-x-4">
+                    <div class="flex items-start space-x-3 sm:space-x-4">
                         <div class="flex-shrink-0 mt-1">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
-                                <i class="fas fa-check text-white text-sm"></i>
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs sm:text-sm"></i>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold mb-1">Security Training</h3>
-                            <p class="text-gray-400">
+                            <h3 class="text-lg sm:text-xl font-bold mb-1">Security Training</h3>
+                            <p class="text-sm sm:text-base text-gray-400">
                                 Comprehensive cybersecurity awareness programs to turn your employees into a human firewall.
                             </p>
                         </div>
                     </div>
                 </div>
                 
-                <a href="#contact" class="inline-block mt-8 px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow">
+                <a href="#contact" class="inline-block mt-6 sm:mt-8 px-6 py-3 sm:px-8 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow">
                     Explore Solutions
                 </a>
             </div>
             
             <div class="order-1 lg:order-2 relative">
-                <div class="cyber-border rounded-2xl overflow-hidden bg-gray-900 p-1">
-                    <div class="relative h-full w-full bg-gray-900 rounded-xl overflow-hidden">
+                <div class="cyber-border rounded-xl sm:rounded-2xl overflow-hidden bg-gray-900 p-1">
+                    <div class="relative h-full w-full bg-gray-900 rounded-lg sm:rounded-xl overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10"></div>
-                        <div class="relative z-10 p-8">
-                            <div class="flex items-center space-x-2 mb-6">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <div class="relative z-10 p-4 sm:p-6 md:p-8">
+                            <div class="flex items-center space-x-2 mb-4 sm:mb-6">
+                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
                             </div>
                             
-                            <div class="mb-8">
-                                <div class="flex items-center space-x-2 mb-4">
+                            <div class="mb-6 sm:mb-8">
+                                <div class="flex items-center space-x-2 mb-3 sm:mb-4">
                                     <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
-                                    <span class="text-cyan-400 font-mono">Security Dashboard</span>
+                                    <span class="text-cyan-400 font-mono text-sm sm:text-base">Security Dashboard</span>
                                 </div>
                                 
-                                <div class="grid grid-cols-3 gap-4 mb-6">
-                                    <div class="bg-gray-800/70 p-3 rounded-lg">
+                                <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                                    <div class="bg-gray-800/70 p-2 sm:p-3 rounded-lg">
                                         <div class="text-xs text-gray-400 mb-1">Threats</div>
-                                        <div class="text-xl font-bold text-green-400">0</div>
+                                        <div class="text-lg sm:text-xl font-bold text-green-400">0</div>
                                     </div>
-                                    <div class="bg-gray-800/70 p-3 rounded-lg">
+                                    <div class="bg-gray-800/70 p-2 sm:p-3 rounded-lg">
                                         <div class="text-xs text-gray-400 mb-1">Alerts</div>
-                                        <div class="text-xl font-bold text-yellow-400">2</div>
+                                        <div class="text-lg sm:text-xl font-bold text-yellow-400">2</div>
                                     </div>
-                                    <div class="bg-gray-800/70 p-3 rounded-lg">
+                                    <div class="bg-gray-800/70 p-2 sm:p-3 rounded-lg">
                                         <div class="text-xs text-gray-400 mb-1">Protected</div>
-                                        <div class="text-xl font-bold text-cyan-400">100%</div>
+                                        <div class="text-lg sm:text-xl font-bold text-cyan-400">100%</div>
                                     </div>
                                 </div>
                                 
-                                <div class="h-32 bg-gray-800/70 rounded-lg mb-4 relative overflow-hidden">
+                                <div class="h-24 sm:h-32 bg-gray-800/70 rounded-lg mb-3 sm:mb-4 relative overflow-hidden">
                                     <div class="absolute inset-0 flex items-end">
                                         <div class="h-1/4 w-full bg-purple-500/30"></div>
                                         <div class="h-1/2 w-full bg-cyan-500/30"></div>
@@ -591,9 +677,9 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-2">
                                     <div class="w-2 h-2 rounded-full bg-purple-400"></div>
-                                    <span class="text-sm">Active Protection</span>
+                                    <span class="text-xs sm:text-sm">Active Protection</span>
                                 </div>
-                                <div class="text-green-400 text-sm font-mono">SECURE</div>
+                                <div class="text-green-400 text-xs sm:text-sm font-mono">SECURE</div>
                             </div>
                         </div>
                     </div>
@@ -606,125 +692,125 @@
     </section>
     
     <!-- Testimonials -->
-    <section class="py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+    <section class="py-12 sm:py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+        <div class="text-center mb-12 sm:mb-16">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
                 Trusted by <span class="gradient-text">Security Leaders</span>
             </h2>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+            <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
                 Don't just take our word for it. Here's what our clients say about our cybersecurity solutions.
             </p>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="cyber-border bg-gray-900/50 rounded-xl p-8 hover:bg-gray-900 transition-all duration-300">
-                <div class="flex items-center mb-6">
-                    <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-12 h-12 rounded-full mr-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div class="cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 hover:bg-gray-900 transition-all duration-300 testimonial-card">
+                <div class="flex items-center mb-4 sm:mb-6">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4">
                     <div>
-                        <h4 class="font-bold">Sarah Johnson</h4>
-                        <p class="text-sm text-gray-500">CTO, TechNova</p>
+                        <h4 class="font-bold text-sm sm:text-base">Sarah Johnson</h4>
+                        <p class="text-xs text-gray-500">CTO, TechNova</p>
                     </div>
                 </div>
-                <p class="text-gray-400 mb-6">
+                <p class="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
                     "VantaSec's penetration testing identified vulnerabilities our team had missed for months. Their detailed reports helped us prioritize fixes effectively."
                 </p>
                 <div class="flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
                 </div>
             </div>
             
-            <div class="cyber-border bg-gray-900/50 rounded-xl p-8 hover:bg-gray-900 transition-all duration-300">
-                <div class="flex items-center mb-6">
-                    <img src="https://randomuser.me/api/portraits/men/54.jpg" class="w-12 h-12 rounded-full mr-4">
+            <div class="cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 hover:bg-gray-900 transition-all duration-300 testimonial-card">
+                <div class="flex items-center mb-4 sm:mb-6">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4">
                     <div>
-                        <h4 class="font-bold">Michael Chen</h4>
-                        <p class="text-sm text-gray-500">CISO, GlobalBank</p>
+                        <h4 class="font-bold text-sm sm:text-base">Michael Chen</h4>
+                        <p class="text-xs text-gray-500">CISO, GlobalBank</p>
                     </div>
                 </div>
-                <p class="text-gray-400 mb-6">
+                <p class="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
                     "The security consulting team helped us navigate complex compliance requirements while actually improving our security posture. Exceptional service."
                 </p>
                 <div class="flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
                 </div>
             </div>
             
-            <div class="cyber-border bg-gray-900/50 rounded-xl p-8 hover:bg-gray-900 transition-all duration-300">
-                <div class="flex items-center mb-6">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-12 h-12 rounded-full mr-4">
+            <div class="cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 hover:bg-gray-900 transition-all duration-300 testimonial-card">
+                <div class="flex items-center mb-4 sm:mb-6">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4">
                     <div>
-                        <h4 class="font-bold">Emma Rodriguez</h4>
-                        <p class="text-sm text-gray-500">Director of Security, HealthCorp</p>
+                        <h4 class="font-bold text-sm sm:text-base">Emma Rodriguez</h4>
+                        <p class="text-xs text-gray-500">Director of Security, HealthCorp</p>
                     </div>
                 </div>
-                <p class="text-gray-400 mb-6">
+                <p class="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
                     "Their vulnerability assessments provide actionable insights. The prioritized remediation plans save us countless hours in security operations."
                 </p>
                 <div class="flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                    <i class="fas fa-star text-yellow-400 text-sm"></i>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- CTA Section -->
-    <section id="contact" class="py-28 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto relative overflow-hidden">
+    <section id="contact" class="py-16 sm:py-28 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10"></div>
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMDAwMDAwIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA6Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiMxMTExMTEiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=')] opacity-5"></div>
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVctd2lkdGg9IjUiIGhlaWdodD0iNSIgZmlsbD0iIzAwMDAwMCI+PC9yZWN0Pgo8cGF0aCBkPSJNMCA1TDUgMFpNNiA0TDQgNlpNLTEgMUwxIC0xWiIgc3Ryb2tlPSIjMTExMTExIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')] opacity-5"></div>
         </div>
         
         <div class="relative z-10 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
                 Ready to <span class="gradient-text glow">Secure Your Future</span>?
             </h2>
-            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-10">
+            <p class="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 sm:mb-10">
                 Join thousands of enterprises who trust VantaSec for their cybersecurity needs. Get started with a free security assessment today.
             </p>
             
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="#contact-form" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow text-lg">
+            <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 cta-buttons">
+                <a href="#contact-form" class="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow text-sm sm:text-base">
                     Request Demo
                 </a>
-                <a href="tel:+15551234567" class="px-8 py-4 border border-gray-700 rounded-full font-medium hover:bg-gray-800 transition-all duration-300 btn-hover-grow text-lg flex items-center justify-center space-x-2">
+                <a href="tel:+15551234567" class="px-6 py-3 sm:px-8 sm:py-4 border border-gray-700 rounded-full font-medium hover:bg-gray-800 transition-all duration-300 btn-hover-grow text-sm sm:text-base flex items-center justify-center space-x-2">
                     <i class="fas fa-phone-alt"></i>
                     <span>Speak to an Expert</span>
                 </a>
             </div>
             
             <!-- Contact Form -->
-            <div id="contact-form" class="mt-16 max-w-2xl mx-auto cyber-border bg-gray-900/50 rounded-xl p-8">
-                <h3 class="text-2xl font-bold mb-6 gradient-text">Get in Touch</h3>
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div id="contact-form" class="mt-12 sm:mt-16 max-w-2xl mx-auto cyber-border bg-gray-900/50 rounded-lg sm:rounded-xl p-6 sm:p-8 contact-form">
+                <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 gradient-text">Get in Touch</h3>
+                <form class="space-y-4 sm:space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Name</label>
-                            <input type="text" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Your name">
+                            <label for="name" class="block text-xs sm:text-sm font-medium text-gray-400 mb-1">Name</label>
+                            <input type="text" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm sm:text-base" placeholder="Your name">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                            <input type="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Your email">
+                            <label for="email" class="block text-xs sm:text-sm font-medium text-gray-400 mb-1">Email</label>
+                            <input type="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base" placeholder="Your email">
                         </div>
                     </div>
                     <div>
-                        <label for="company" class="block text-sm font-medium text-gray-400 mb-1">Company</label>
-                        <input type="text" id="company" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Your company">
+                        <label for="company" class="block text-xs sm:text-sm font-medium text-gray-400 mb-1">Company</label>
+                        <input type="text" id="company" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm sm:text-base" placeholder="Your company">
                     </div>
                     <div>
-                        <label for="service" class="block text-sm font-medium text-gray-400 mb-1">Service Interested In</label>
-                        <select id="service" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <label for="service" class="block text-xs sm:text-sm font-medium text-gray-400 mb-1">Service Interested In</label>
+                        <select id="service" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base">
                             <option value="">Select a service</option>
                             <option value="penetration-testing">Penetration Testing</option>
                             <option value="security-consulting">Security Consulting</option>
@@ -733,10 +819,10 @@
                         </select>
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Message</label>
-                        <textarea id="message" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Your message"></textarea>
+                        <label for="message" class="block text-xs sm:text-sm font-medium text-gray-400 mb-1">Message</label>
+                        <textarea id="message" rows="3" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm sm:text-base" placeholder="Your message"></textarea>
                     </div>
-                    <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow">
+                    <button type="submit" class="w-full px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition-all duration-300 btn-hover-grow text-sm sm:text-base">
                         Send Message
                     </button>
                 </form>
@@ -745,80 +831,76 @@
     </section>
     
     <!-- Footer -->
-    <footer id="about" class="py-16 px-4 sm:px-8 lg:px-16 bg-gray-900/50 border-t border-gray-800">
+    <footer id="about" class="py-12 sm:py-16 px-4 sm:px-8 lg:px-16 bg-gray-900/50 border-t border-gray-800">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 footer-grid">
                 <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <!-- Logo image span - replace src with your actual logo -->
-                        <span id="footer-logo" class="hidden">
-                            <!-- <img src="path-to-your-logo.png" alt="VantaSec Logo" class="h-10"> -->
-                        </span>
-                        <div class="hexagon w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center">
-                            <span class="text-black font-bold">VS</span>
+                    <div class="flex items-center space-x-2 mb-3 sm:mb-4">
+                        <div class="hexagon w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center">
+                            <span class="text-black font-bold text-sm sm:text-base">VS</span>
                         </div>
-                        <span class="text-2xl font-bold gradient-text">VantaSec</span>
+                        <span class="text-xl sm:text-2xl font-bold gradient-text">VantaSec</span>
                     </div>
-                    <p class="text-gray-400 mb-4">
+                    <p class="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4">
                         Next-generation cybersecurity solutions powered by AI and quantum-resistant technologies.
                     </p>
-                    <div class="flex space-x-4">
+                    <div class="flex space-x-3 sm:space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-twitter text-sm sm:text-base"></i>
                         </a>
                         <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-linkedin"></i>
+                            <i class="fab fa-linkedin text-sm sm:text-base"></i>
                         </a>
                         <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-github"></i>
+                            <i class="fab fa-github text-sm sm:text-base"></i>
                         </a>
                         <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-youtube"></i>
+                            <i class="fab fa-youtube text-sm sm:text-base"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Solutions</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300">Penetration Testing</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300">Security Consulting</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300">Vulnerability Assessment</a></li>
-                        <li><a href="#solutions" class="text-gray-400 hover:text-white transition-colors duration-300">Compliance Solutions</a></li>
-                        <li><a href="#solutions" class="text-gray-400 hover:text-white transition-colors duration-300">Incident Response</a></li>
+                    <h3 class="text-sm sm:text-base font-bold mb-2 sm:mb-3">Solutions</h3>
+                    <ul class="space-y-1 sm:space-y-2">
+                        <li><a href="#services" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Penetration Testing</a></li>
+                        <li><a href="#services" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Security Consulting</a></li>
+                        <li><a href="#services" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Vulnerability Assessment</a></li>
+                        <li><a href="#solutions" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Compliance Solutions</a></li>
+                        <li><a href="#solutions" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Incident Response</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Resources</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Whitepapers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Case Studies</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Webinars</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">API Docs</a></li>
+                    <h3 class="text-sm sm:text-base font-bold mb-2 sm:mb-3">Resources</h3>
+                    <ul class="space-y-1 sm:space-y-2">
+                        <li><a href="#" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Blog</a></li>
+                        <li><a href="#" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Whitepapers</a></li>
+                        <li><a href="#" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Case Studies</a></li>
+                        <li><a href="#" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">Webinars</a></li>
+                        <li><a href="#" class="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300">API Docs</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2 text-cyan-400"></i> 123 Cyber Ave, San Francisco</li>
-                        <li class="text-gray-400"><i class="fas fa-phone-alt mr-2 text-purple-400"></i> <a href="tel:+15551234567" class="hover:text-white">+1 (555) 123-4567</a></li>
-                        <li class="text-gray-400"><i class="fas fa-envelope mr-2 text-green-400"></i> <a href="mailto:security@vantasec.com" class="hover:text-white">security@vantasec.com</a></li>
-                        <li class="text-gray-400"><i class="fas fa-clock mr-2 text-yellow-400"></i> 24/7 Support</li>
+                    <h3 class="text-sm sm:text-base font-bold mb-2 sm:mb-3">Contact</h3>
+                    <ul class="space-y-1 sm:space-y-2">
+                        <li class="text-xs sm:text-sm text-gray-400"><i class="fas fa-map-marker-alt mr-2 text-cyan-400 text-xs"></i> 123 Cyber Ave, San Francisco</li>
+                        <li class="text-xs sm:text-sm text-gray-400"><i class="fas fa-phone-alt mr-2 text-purple-400 text-xs"></i> <a href="tel:+15551234567" class="hover:text-white">+1 (555) 123-4567</a></li>
+                        <li class="text-xs sm:text-sm text-gray-400"><i class="fas fa-envelope mr-2 text-green-400 text-xs"></i> <a href="mailto:security@vantasec.com" class="hover:text-white">security@vantasec.com</a></li>
+                        <li class="text-xs sm:text-sm text-gray-400"><i class="fas fa-clock mr-2 text-yellow-400 text-xs"></i> 24/7 Support</li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 mb-4 md:mb-0">
+            <div class="border-t border-gray-800 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-xs sm:text-sm text-gray-500 mb-3 md:mb-0">
                     © 2023 VantaSec. All rights reserved.
                 </p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors duration-300">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors duration-300">Terms of Service</a>
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors duration-300">Security</a>
+                <div class="flex space-x-4 sm:space-x-6">
+                    <a href="#" class="text-xs sm:text-sm text-gray-500 hover:text-white transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="text-xs sm:text-sm text-gray-500 hover:text-white transition-colors duration-300">Terms of Service</a>
+                    <a href="#" class="text-xs sm:text-sm text-gray-500 hover:text-white transition-colors duration-300">Security</a>
                 </div>
             </div>
         </div>
@@ -837,6 +919,29 @@
             
             document.querySelectorAll('section, .cyber-border').forEach(section => {
                 observer.observe(section);
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mobileMenuClose.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
             });
             
             // Terminal typing effect
@@ -886,7 +991,7 @@
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop - 100,
+                            top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
