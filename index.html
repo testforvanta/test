@@ -165,6 +165,31 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
         }
+
+        /* Custom scrollbar for chat messages */
+        #chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        #chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--secondary), var(--primary));
+        }
+
+        /* Ensure chat window cyber-border pseudo elements are clipped by rounded corners */
+        #chat-window.cyber-border {
+            overflow: visible; /* Allow pseudo-elements to show */
+        }
+        #chat-window.cyber-border > div { /* Apply clipping to inner content if needed, or ensure border-radius is on the main element */
+             border-radius: inherit; /* This might not be enough, direct border-radius on pseudo might be better or on parent */
+        }
+
     </style>
 </head>
 <body class="hacker-grid min-h-screen">
@@ -891,7 +916,114 @@
                     }
                 });
             });
+
+            // Chatbot UI Functionality
+            const chatToggleButton = document.getElementById('chat-toggle');
+            const chatWindow = document.getElementById('chat-window');
+            const closeChatButton = document.getElementById('close-chat');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const chatSendButton = document.getElementById('chat-send');
+
+            chatToggleButton.addEventListener('click', () => {
+                chatWindow.classList.toggle('hidden');
+                if (!chatWindow.classList.contains('hidden')) {
+                    chatInput.focus();
+                }
+            });
+
+            closeChatButton.addEventListener('click', () => {
+                chatWindow.classList.add('hidden');
+            });
+
+            function addMessageToChat(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('py-2', 'px-3', 'rounded-xl', 'max-w-[80%]', 'text-sm', 'sm:text-base', 'leading-snug');
+
+                if (sender === 'user') {
+                    messageElement.classList.add('bg-gradient-to-br', 'from-cyan-500', 'to-purple-600', 'text-white', 'ml-auto', 'rounded-br-none');
+                    messageElement.textContent = message;
+                } else {
+                    messageElement.classList.add('bg-gray-700', 'text-gray-200', 'mr-auto', 'rounded-bl-none');
+                    // Placeholder for NLweb processing - animate typing for bot
+                    messageElement.innerHTML = '<span class="italic text-gray-400">VantaBot is typing...</span>';
+                    setTimeout(() => {
+                         messageElement.innerHTML = ''; // Clear "typing..."
+                         let charIndex = 0;
+                         const typingInterval = setInterval(() => {
+                            if (charIndex < message.length) {
+                                messageElement.textContent += message.charAt(charIndex);
+                                charIndex++;
+                                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll down
+                            } else {
+                                clearInterval(typingInterval);
+                            }
+                        }, 25); // Slightly faster typing
+                    }, 800); // Shorter delay before typing starts
+                }
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+            }
+
+            function handleSendMessage() {
+                const messageText = chatInput.value.trim();
+                if (messageText) {
+                    addMessageToChat(messageText, 'user');
+                    chatInput.value = '';
+
+                    // Placeholder for NLweb integration
+                    // For now, simulate a bot response
+                    setTimeout(() => {
+                        addMessageToChat("Thanks for your message! I'm still learning. NLweb integration is pending.", 'bot');
+                    }, 1500);
+                }
+            }
+
+            chatSendButton.addEventListener('click', handleSendMessage);
+            chatInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    handleSendMessage();
+                }
+            });
+
+            // Remove initial welcome message if it exists, as JS will handle it or it will be part of conversation history
+            // const initialWelcome = chatMessages.querySelector('.text-center'); // HTML element removed
+            // if (initialWelcome && initialWelcome.textContent.includes("Welcome! How can I help you today?")) {
+            //     addMessageToChat("Welcome! How can I help you today?", 'bot');
+            //     initialWelcome.remove();
+            // } else
+            if (chatMessages.children.length === 0) { // Add welcome message if chat is empty
+                addMessageToChat("Welcome! How can I help you today?", 'bot');
+            }
+
         });
     </script>
+
+    <!-- Chatbot Window -->
+    <div id="chat-window" class="hidden fixed bottom-0 right-0 w-full h-full sm:h-auto sm:max-h-[70vh] sm:w-96 sm:bottom-24 sm:right-8 bg-gray-900/80 backdrop-blur-md rounded-none sm:rounded-lg shadow-xl cyber-border z-[60] flex flex-col">
+        <div class="p-3 sm:p-4 border-b border-gray-700 flex justify-between items-center">
+            <h3 class="text-md sm:text-lg font-bold gradient-text">Chat with VantaBot</h3>
+            <button id="close-chat" class="text-gray-400 hover:text-white p-2 rounded-md hover:bg-gray-700 transition-colors">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+        </div>
+        <div id="chat-messages" class="p-3 sm:p-4 flex-grow overflow-y-auto space-y-3">
+            <!-- Messages will appear here -->
+            <!-- Initial welcome message is now added via JS -->
+        </div>
+        <div class="p-3 sm:p-4 border-t border-gray-700">
+            <div class="flex space-x-2 items-center">
+                <input type="text" id="chat-input" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Type your message...">
+                <button id="chat-send" class="bg-gradient-to-r from-cyan-500 to-purple-600 p-2 sm:px-4 sm:py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all duration-300">
+                    <i class="fas fa-paper-plane text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Button -->
+    <button id="chat-toggle" class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 bg-gradient-to-r from-cyan-500 to-purple-600 p-3 sm:p-4 rounded-full shadow-lg hover:opacity-90 transition-all duration-300 btn-hover-grow z-50">
+        <i class="fas fa-comments text-xl sm:text-2xl text-white"></i>
+    </button>
 </body>
 </html>
