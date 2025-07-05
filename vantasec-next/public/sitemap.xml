@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://vantasec.org/</loc>
+    <lastmod>2024-07-15</lastmod> <!-- Should be updated to the last modification date -->
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- If sections are considered important enough to list, they can be added like this,
+       but for an SPA structure, the root is often sufficient.
+       Search engines might not prioritize hash URLs in sitemaps as much as distinct pages.
+  <url>
+    <loc>https://vantasec.org/#services</loc>
+    <lastmod>2024-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vantasec.org/#solutions</loc>
+    <lastmod>2024-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vantasec.org/#contact</loc>
+    <lastmod>2024-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   -->
+</urlset>
