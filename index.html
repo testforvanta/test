@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VantaSec | Next-Gen Cybersecurity</title>
-    <link rel="icon" type="image/x-icon" href="logo2.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/logo2.png">
+    <!-- Tailwind CSS and Font Awesome will be handled by Vite/React -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -168,6 +167,8 @@
     </style>
 </head>
 <body class="hacker-grid min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
     <!-- Animated Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-purple-500 opacity-20 floating" style="animation-delay: 0s;"></div>
@@ -182,7 +183,7 @@
             <div class="flex items-center space-x-2">
                 <!-- Logo image span - replace src with your actual logo -->
                 <span id="logo-image" >
-                     <img src="logo.png" alt="VantaSec Logo" class="h-10 " >
+                     <img src="/logo.png" alt="VantaSec Logo" class="h-10 " >
                 </span>
             </div>
             
@@ -755,7 +756,7 @@
                 <div>
                       <div class="flex items-center space-x-2 mb-3 sm:mb-4">
                         <span id="logo-image">
-                            <img src="logo.png" alt="VantaSec Logo" class="h-6 sm:h-9">
+                            <img src="/logo.png" alt="VantaSec Logo" class="h-6 sm:h-9">
                         </span>
                     </div>
                     <p class="text-gray-400 mb-4">

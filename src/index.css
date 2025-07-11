@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add custom global styles below if needed */
+body {
+  /* Example: Replicating a style from the original index.html if it's meant to be global */
+  /* background-color: #0a0a0a;
+     color: #f1f1f1; */
+  font-family: 'Space Grotesk', sans-serif; /* Ensuring the font from original HTML is used */
+}
+
+/* Keeping the root variables from the original CSS as they might be used by Tailwind's theme or custom components */
+:root {
+    --primary: #00f0ff;
+    --secondary: #7928ca;
+}
+
+/* If the hacker-grid background is desired globally for the React app part: */
+/*
+body.vite-react-app .hacker-grid {
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+*/
+
+/* The original styles from index.html <style> tag might need to be migrated here or into components */
+/* For example, .gradient-text, .glow, etc. If they are used by React components. */
+/* For now, I'm keeping them separate as the React app is just a placeholder. */
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.glow {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+.glow-green {
+    text-shadow: 0 0 10px rgba(15, 193, 39, 0.801);
+}
